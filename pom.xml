@@ -8,11 +8,11 @@
         <version>3.4.5</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.accounts.services</groupId>
-    <artifactId>accounts-service</artifactId>
+    <groupId>com.accounts.api</groupId>
+    <artifactId>accounts-api</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>accounts-service</name>
-    <description>accounts-service</description>
+    <name>accounts-api</name>
+    <description>accounts-api</description>
     <url/>
     <licenses>
         <license/>

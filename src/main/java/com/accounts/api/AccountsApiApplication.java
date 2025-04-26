@@ -1,13 +1,13 @@
-package com.accounts.services;
+package com.accounts.api;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class AccountsServiceApplication {
+public class AccountsApiApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(AccountsServiceApplication.class, args);
+        SpringApplication.run(AccountsApiApplication.class, args);
     }
 
 }
