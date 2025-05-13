@@ -1,17 +1,40 @@
 package com.accounts.api.service.impl;
 
-import com.accounts.api.dto.Customer;
+import com.accounts.api.dto.CustomerDto;
+import com.accounts.api.entity.Customer;
+import com.accounts.api.exception.types.CustomerAlreadyExistException;
+import com.accounts.api.mapper.AccountMapper;
+import com.accounts.api.mapper.CustomerMapper;
+import com.accounts.api.repository.AccountsRepository;
+import com.accounts.api.repository.CustomerRepository;
 import com.accounts.api.service.AccountService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
+@RequiredArgsConstructor
 public class AccountServiceImpl implements AccountService {
+
+    private final CustomerRepository customerRepository;
+
+    private final AccountsRepository accountRepository;
+
+
     /**
-     * @param customer - Customer Object
+     * @param customerDto - Customer Object
      */
     @Override
-    public void createAccount(Customer customer) {
-
+    public void createAccount(CustomerDto customerDto) {
+        Customer customer  = CustomerMapper.toCustomerDto(customerDto);
+        Optional<Customer> optionalCustomer= customerRepository.findByMobileNumber(customerDto.getMobileNumber());
+        if(optionalCustomer.isPresent()){
+            throw new CustomerAlreadyExistException("Customer already registered with given mobileNumber " +
+                    customerDto.getMobileNumber());
+        }
+        Customer savedCustomer = customerRepository.save(customer);
+        accountRepository.save(AccountMapper.createNewAccount(savedCustomer));
     }
 
     /**
@@ -19,16 +42,16 @@ public class AccountServiceImpl implements AccountService {
      * @return Accounts Details based on a given mobileNumber
      */
     @Override
-    public Customer fetchAccount(String mobileNumber) {
+    public CustomerDto fetchAccount(String mobileNumber) {
         return null;
     }
 
     /**
-     * @param customer - Customer Object
+     * @param customerDto - Customer Object
      * @return boolean indicating if the update of Account details is successful or not
      */
     @Override
-    public boolean updateAccount(Customer customer) {
+    public boolean updateAccount(CustomerDto customerDto) {
         return false;
     }
 

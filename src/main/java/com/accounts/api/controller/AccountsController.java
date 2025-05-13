@@ -1,7 +1,7 @@
 package com.accounts.api.controller;
 
 import com.accounts.api.constant.AccountsConstants;
-import com.accounts.api.dto.Customer;
+import com.accounts.api.dto.CustomerDto;
 import com.accounts.api.dto.ErrorResponse;
 import com.accounts.api.dto.Response;
 import com.accounts.api.service.AccountService;
@@ -48,8 +48,8 @@ public class AccountsController {
             )
     })
     @PostMapping("/create")
-    public ResponseEntity<Response> createAccount(@Valid @RequestBody Customer customer) {
-        accountService.createAccount(customer);
+    public ResponseEntity<Response> createAccount(@Valid @RequestBody CustomerDto customerDto) {
+        accountService.createAccount(customerDto);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(new Response(AccountsConstants.STATUS_201, AccountsConstants.MESSAGE_201));
