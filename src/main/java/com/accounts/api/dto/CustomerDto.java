@@ -24,5 +24,5 @@ public class CustomerDto {
     private String mobileNumber;
 
 
-    private Account account;
+    private AccountDto accountDto;
 }

@@ -1,6 +1,7 @@
 package com.accounts.api.mapper;
 
 import com.accounts.api.constant.AccountsConstants;
+import com.accounts.api.dto.AccountDto;
 import com.accounts.api.entity.Account;
 import com.accounts.api.entity.Customer;
 
@@ -21,4 +22,21 @@ public class AccountMapper {
         newAccount.setBranchAddress(AccountsConstants.ADDRESS);
         return newAccount;
     }
+
+    public static AccountDto mapToAccountDto(Account account) {
+        return AccountDto.builder()
+                .accountNumber(account.getAccountNumber())
+                .accountType(account.getAccountType())
+                .branchAddress(account.getBranchAddress())
+                .build();
+    }
+
+    public static void mapToAccount(AccountDto accountDto, Account account) {
+       account.setAccountType(accountDto.getAccountType());
+       account.setBranchAddress(accountDto.getBranchAddress());
+       account.setAccountNumber(accountDto.getAccountNumber());
+
+    }
+
+
 }
